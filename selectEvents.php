@@ -3,17 +3,26 @@
     include 'dbConnect.php';
 
     //SQL command
-    $SQL = "SELECT name,date FROM wdv341_events";
+    $SQL  = "SELECT name,date FROM wdv341_events";
 
-    //prepare statement
-    $stmt = $conn->prepare($SQL);
-
-    //execute
-    $stmt->execute();
-
-    //setting fetch mode to php assoicate array
-    $stmt->setFetchMode(PDO::FETCH_ASSOC);
-
+    
+    try{
+        //prepare statement
+        $stmt = $conn->prepare($SQL);
+        //execute
+        $stmt->execute();
+        //setting fetch mode to php assoicate array
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    }
+    catch(ValueError $e){
+        echo "<p>Failure to prepare SQL query.</p>";
+    }
+    catch(PDOException $e){
+        echo "<p>Failure to execute SQL query.</p>";
+    }
+    catch(Error $e){
+        echo "<p>Error in processing SQL query.</p>";
+    }
     
 ?>
 
@@ -36,16 +45,21 @@
     <h2>Unit-7 Select data</h2>
     <h3>Current Events</h3>
     <?php
-        while( $row=$stmt->fetch()){
-            echo "<p>\n\t\t";
-            echo "<span>";
-            echo $row['name'];
-            echo "</span>\n\t\t";
-            echo "<span>";
-            echo $row['date'];
-            echo "</span>\n\t";
-            echo "</p>\n\t";
+    echo "<table border='1'>";
+	echo "<tr><th>Event Name</th><th>Date of the event</th></tr>";
+        try{
+            while( $row=$stmt->fetch()){
+                echo '<tr>';
+            echo '<td>',$row['name'],'</td>';
+            echo '<td>',$row['date'],'</td>';
+            echo "</tr>";
+            }
         }
+        catch(Error $e){
+            echo "<p>Unable to process table.</p>";
+        }
+    echo "</table>";
+	echo "<p>&nbsp;</p>";
     ?>
 </body>
 </html>
