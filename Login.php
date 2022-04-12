@@ -39,6 +39,10 @@
         $rowCount = $stmt->fetchColumn();
 
         echo "<h2>$rowCount, $eventusername, $eventpassword</h2>";
+
+        if($rowCount > 0){
+            
+        }
     }
     else{
 
