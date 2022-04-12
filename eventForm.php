@@ -6,12 +6,14 @@ if (isset($_POST['submit'])  && $_POST['email'] == '') {
     $eventdescription = $_POST['description'];
     $eventpresenter = $_POST['presenter'];
     $date = date('Y-m-d');
+    $eventdate = $_POST['date'];
+    $eventtime = $_POST['time'];
 
     //connect to the database
     require "dbConnect.php";
 
     //prepare statement
-    $sql = "INSERT INTO wdv341_events (name, description, presenter, date_inserted, date_updated) VALUES (:event_name, :event_description, :event_presenter, :event_inserted, :event_updated)";
+    $sql = "INSERT INTO wdv341_events (name, description, presenter, date_inserted, date_updated, date, time) VALUES (:event_name, :event_description, :event_presenter, :event_inserted, :event_updated, :event_date, :event_time)";
 
     $stmt = $conn->prepare($sql);
 
@@ -21,6 +23,8 @@ if (isset($_POST['submit'])  && $_POST['email'] == '') {
     $stmt->bindParam(':event_presenter', $eventpresenter);
     $stmt->bindParam(':event_inserted', $date);
     $stmt->bindParam(':event_updated', $date);
+    $stmt->bindParam(':event_date', $eventdate);
+    $stmt->bindParam(':event_time', $eventtime);
 
     //execute
     $stmt->execute();
@@ -67,6 +71,12 @@ if(!isset($_POST['submit'])){
         </p>
         <p>
             <input type="text" name="email" class="email">
+        </p>
+        <p>
+            <label for="date">Select a date: </label>
+            <input type="date" name="date" id="date">
+            <label for="time">Select a time:</label>
+            <input type="time" name="time" id="time">
         </p>
         <p>
             <input type="submit" value="submit" name="submit" >
