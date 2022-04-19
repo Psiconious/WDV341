@@ -52,7 +52,7 @@
                     $passWord = $_POST['password'];
 
                     //prepare statement
-                    $sql = "SELECT username, password FROM yugioh_db_users WHERE username = :user AND password = :pass";
+                    $sql = "SELECT count(*) FROM yugioh_db_users WHERE username = :user AND password = :pass";
                     $stmt = $conn->prepare($sql);
 
                     try{
