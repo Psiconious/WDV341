@@ -64,6 +64,7 @@
     display: none;
 }
 
+
 @media all and (max-width: 576px){
     .errormessages{
         width: 100%;
@@ -97,13 +98,5 @@
 @media all and (min-width: 768px) and (max-width: 991px){
     .login-register-form{
         width: 60%;
-    }
-}
-
-@media all and (max-width: 991px){
-    .form-body{
-        align-items: center;
-        flex-direction: column;
-        
     }
 }
