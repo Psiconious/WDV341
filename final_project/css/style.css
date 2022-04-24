@@ -2,12 +2,168 @@ body{
     margin: 0;
     padding: 0;
     background: #2a2929;
+    font-family: 'bebasregular', sans-serif;
+}
+
+.col-3{
+    column-count: 3;
+    column-gap: 40px;
+    column-width: 150px;
+    column-rule: 1px solid antiquewhite;
+    line-height: 1.3em;
+}
+
+.col-3 a{
+    color:antiquewhite;
+}
+
+.col-3 h2{
+    column-span: all;
+    text-align: center;
+}
+
+div{
+    overflow: auto;
+}
+
+.container{
+    box-shadow: 2px 2px 5px black;
+    width: 60%;
+    height: 80vh;
+    background: #555;
+    padding: 2%;
+    box-sizing: border-box;
+}
+
+footer{
+    background: #262626;
+    padding: 1% 1%;
+}
+
+header{
+    position: absolute;
+    top:0;
+    left: 0;
+    padding: 0 100px;
+    background: #262626;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+header .logo{
+    color: #fff;
+    height: 50px;
+    line-height: 50px;
+    font-size: 24px;
+    float: left;
+    font-weight: bold;
+}
+
+header nav{
+    float: right;
+}
+
+header nav ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+header nav ul li{
+    list-style: none;
+}
+
+header nav ul li a {
+    height: 50px;
+    line-height: 50px;
+    padding: 0 20px;
+    color: #fff;
+    text-decoration: none;
+    display: block;
+}
+
+header nav ul li a:hover,
+header nav ul li a.active{
+    color: #fff;
+    background: #2196f3;
 }
 
 .main{
     display:flex;
     flex-direction: column;
-    height: 90vh;
+    height: 100vh;
     justify-content: center;
     align-items: center;
+}
+
+.menu-toggle{
+    float:right;
+    line-height: 50px;
+    cursor: pointer;
+    display: none;
+}
+
+section{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.trail{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    color:antiquewhite;
+}
+
+@media (max-width: 600px){
+    .container{
+        width: 100%;
+    }
+}
+@media (min-width: 601px) and (max-width:991px){
+    .container{
+        width: 70%;
+    }
+}
+@media (max-width: 991px){
+    header{
+        padding: 0 20px;
+    }
+    header nav{
+        position: absolute;
+        width: 100%;
+        height: calc(100vh - 50px);
+        background: #333;
+        top: 50px;
+        left: -100%;
+        transition: 0.5s;
+    }
+    header nav.active{
+        left: 0;
+    }
+    header nav ul{
+        display: block;
+        text-align: center;
+    }
+    header nav ul li a{
+        border-bottom: 1px solid rgba(0,0,0,.2);
+    }
+    .menu-toggle{
+        display: block;
+    }
+}
+
+@font-face {
+    font-family: 'bebasregular';
+    src: url('../fonts/Bebas-Regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
 }

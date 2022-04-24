@@ -36,7 +36,6 @@ body{
     border-style:none none solid none;
     width:100%;
     font-size:1.25em;
-    transition:all .6s;
 }
 .form-control::placeholder{
     color:#aaa;
