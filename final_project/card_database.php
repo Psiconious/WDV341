@@ -48,16 +48,7 @@
         <div class="main">
             <section>
                 <div class="container">
-                    <div class="col-3">
-                        <h2>About this site</h2>
-                        Welcome to the dueling database. This website is a database dedicated to the Yu-Gi-Oh! Duel Monster Card Game.
-                        Here you can look up any card apart of this game by clicking on the card link or click <a href="card_database.php">here</a>.
-                        If you are not familiar with how the Yu-Gi-Oh! Duel Monster Card Game work you can check out our how to play link or click <a href="rules.php">here</a>.
-                    </div>
-                    <div class="col-3">
-                        <h2>How to use this site</h2>
-                        This site primary use is searching card based on criteria selected by the user. 
-                    </div>
+                    
                 </div>
             </section>
         </div>
