@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <script src="javascript/menu-handler.js"></script>
-    <title>Home</title>
+    <title>How to Play</title>
 </head>
 <body>
     <div class="wrapper">
@@ -48,7 +48,21 @@
         <div class="main">
             <section>
                 <div class="container">
-                    
+                    <h1>How to play Yu-Gi-Oh!</h1>
+                    <h2>Understanding the cards</h2>
+                    <div class="col-2">
+                        <div class="clear">
+                        <h3>Monster Cards</h3>
+                            <img class="float-right" src="images/AshBlossomJoyousSpring.webp" alt="Monster Card Example">
+                            <p>  
+                                Monster cards are summoned to attack your opponent&#39s Life Points and defend your own.
+                                They are usually orange (effect) or yellow (normal) in color, but there are many other colors as well. 
+                                Monsters have levels, ranging from 1-12, which are indicated by the stars along the top, and a symbol in the top right corner indicating Attribute. 
+                                Above the card text, the Type, the kind of monster, and monster abilities such as Tuner or Flip are written in bold. 
+                                The Attack and Defense stats are listed as ATK and DEF along the bottom.
+                            </p> 
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>

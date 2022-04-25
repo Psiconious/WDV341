@@ -53,10 +53,18 @@
                         Welcome to the dueling database. This website is a database dedicated to the Yu-Gi-Oh! Duel Monster Card Game.
                         Here you can look up any card apart of this game by clicking on the card link or click <a href="card_database.php">here</a>.
                         If you are not familiar with how the Yu-Gi-Oh! Duel Monster Card Game work you can check out our how to play link or click <a href="rules.php">here</a>.
+                        The primary use of this site is to search cards base on user entered criteria.
                     </div>
                     <div class="col-3">
-                        <h2>How to use this site</h2>
-                        This site primary use is searching card based on criteria selected by the user. 
+                        <h2>What is Yu-Gi-Oh!</h2>
+                        The Yu-Gi-Oh! Trading Card Game is a Japanese collectible card game developed and published by Konami. 
+                        It is based on the fictional game of Duel Monsters created by manga artist Kazuki Takahashi, which appears in portions of the manga franchise Yu-Gi-Oh! and is the central plot device throughout its various anime adaptations and spinoff series.
+                        The trading card game was launched by Konami in 1999 in Japan and March 2002 in North America. 
+                        It was named the top selling trading card game in the world by Guinness World Records on July 7, 2009, having sold over 22 billion cards worldwide. 
+                        As of March 31, 2011, Konami Digital Entertainment Co., Ltd. Japan sold 25.2 billion cards globally since 1999. 
+                        As of January 2021, the game is estimated to have sold about 35 billion cards worldwide and grossed over ¥1 trillion ($9.64 billion). 
+                        Yu-Gi-Oh! Speed Duel, a faster and simplified version of the game, was launched worldwide in January 2019. 
+                        Another faster-paced variation, Yu-Gi-Oh! Rush Duel, launched in Japan in April 2020. 
                     </div>
                 </div>
             </section>

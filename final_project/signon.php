@@ -177,11 +177,7 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body onload="PageLoad()">
-    <div class="logo">
-        <a href="index.php">
-            <img src="icons/Milennium_Puzzle_Icon.webp" alt="Website Logo" id="logo-icon">
-        </a>
-    </div>
+<div class="logo"><a href="index.php">Dueling Database</a></div>
     <section>
         <div class="main">
             <?php

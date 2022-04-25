@@ -1,8 +1,29 @@
 <?php
     session_start();
-
+    $admin = false;
     if(isset($_SESSION['validUser'])){
         $userName = $_SESSION['username'];
+        require "../dbConnect.php";
+        //prepare statement
+        $adminSQL = "SELECT admin FROM yugioh_db_users WHERE username = :user";
+        $stmt = $conn->prepare($adminSQL);
+        try{
+            //bind params
+            $stmt->bindParam(':user', $userName);
+            //execute
+            $stmt->execute();
+            //set fetch mode
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+            //assign admin
+            $fetchedData = $stmt->fetch();
+            $admin = $fetchedData['admin'];
+        }
+        catch(PDOException $e){
+            $admin = false;
+        }
+
+
     }
 
     require 'php/page-handler.php';
@@ -16,7 +37,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <script src="javascript/menu-handler.js"></script>
-    <title>Card Database</title>
+    <title>Card View</title>
 </head>
 <body>
     <div class="wrapper">
@@ -48,6 +69,7 @@
         <div class="main">
             <section>
                 <div class="container">
+                    <?=($admin)? "true" : "false";?>
                     
                 </div>
             </section>

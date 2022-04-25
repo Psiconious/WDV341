@@ -19,7 +19,7 @@ body{
     display: flex;
     justify-content: space-evenly;
     width: 60%;
-    min-height: auto;
+    min-height: 80vh;
     background-color: #f0f0f0;
     padding: 10px;
     box-sizing: border-box;
@@ -113,6 +113,12 @@ body{
     width: 60%;
 }
 
+.logo a{
+    padding: 0 20px;
+    color: #fff;
+    text-decoration: none;
+}
+
 .login-register-form{
     width:max-content
 }
@@ -121,24 +127,13 @@ body{
     display: none;
 }
 
-.logo{
-    display: flex;
-    flex: row;
-    width: 5%;
-}
-
-.logo img{
-    width: 20%;
-    padding-left: 10px;
-    padding-top: 10px;
-}
-
 .main{
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
+    height: fit-content;
 }
 
 @media all and (max-width: 576px){

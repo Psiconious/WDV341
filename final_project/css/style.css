@@ -5,6 +5,23 @@ body{
     font-family: 'bebasregular', sans-serif;
 }
 
+.clear{
+    clear:both;
+}
+
+.col-2 p{
+    column-count: 2;
+    column-gap: 40px;
+    column-width: 150px;
+    column-rule: 1px solid antiquewhite;
+    line-height: 1.3em;
+}
+
+.col-2 h3{
+    column-span: all;
+    text-align: center;
+}
+
 .col-3{
     column-count: 3;
     column-gap: 40px;
@@ -29,14 +46,32 @@ body{
 .container{
     box-shadow: 2px 2px 5px black;
     width: 60%;
-    height: 80vh;
+    min-height: 80vh;
     background: #555;
     padding: 2%;
     box-sizing: border-box;
 }
 
+.container h1 {
+    text-align: center;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #fff;
+}
+
+.container img{
+    width: 160px;
+}
+
+.float-left{
+    float: left;
+}
+
+.float-right{
+    float:right;
+}
+
 footer{
-    background: #262626;
+    background: #000000;
     padding: 1% 1%;
 }
 
@@ -50,7 +85,7 @@ header{
     box-sizing: border-box;
 }
 
-header .logo{
+.logo{
     color: #fff;
     height: 50px;
     line-height: 50px;
