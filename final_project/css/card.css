@@ -1,0 +1,26 @@
+input,select,textarea{
+    display: block;
+    width: 100%;
+}
+
+input:disabled,
+select:disabled {
+    background: white;
+    color: black;
+}
+
+select {
+    /* for Firefox */
+    -moz-appearance: none;
+    /* for Chrome */
+    -webkit-appearance: none;
+}
+
+/* For IE10 */
+select::-ms-expand {
+    display: none;
+}
+
+textarea{
+    resize: none;
+}

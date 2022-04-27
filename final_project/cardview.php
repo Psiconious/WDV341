@@ -81,6 +81,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/card.css">
     <script src="javascript/menu-handler.js"></script>
     <title>Card View</title>
 </head>
@@ -121,6 +122,11 @@
                         <option value="monster" <?=($cardType == 'monster')? 'selected': ''?>>Monster</option>
                         <option value="spell" <?=($cardType == 'spell')? 'selected': ''?>>Spell</option>
                         <option value="trap" <?=($cardType == 'trap')? 'selected': ''?>>Trap</option>
+                    </select>
+                    <label for="stProperty">Spell/Trap Property:</label>
+                    <select name="stProperty" id="stProperty" <?=(!$admin)? "disabled" : ""?>>
+                        <option value="" <?=($stProperty == null)? 'selected': ''?>></option>
+                        <option value=""></option>
                     </select>
                     <label for="cardAttribute">Attribute:</label>
                     <select name="cardAttribute" id="cardAttribute" <?=(!$admin)? "disabled" : ""?>>
@@ -168,7 +174,7 @@
                     <label for="monsterDEF">Defense:</label>
                     <input type="text" name="monsterDEF" id="monsterDEF" value="<?=$monsterDEF?>" <?=(!$admin)? "disabled" : ""?>>
                     <label for="cardEffect">Effect:</label>
-                    <textarea name="cardEffect" id="cardEffect" cols="30" rows="10"><?=$cardEffect?></textarea>
+                    <textarea name="cardEffect" id="cardEffect" cols="50" rows="10"><?=$cardEffect?></textarea>
                 </div>
             </section>
         </div>
