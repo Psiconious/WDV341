@@ -134,6 +134,7 @@ body{
     align-items: center;
     width: 100%;
     height: fit-content;
+    margin: 10px 0;
 }
 
 @media all and (max-width: 576px){
