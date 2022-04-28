@@ -2,6 +2,7 @@
     session_start();
 
     $tableRowColor = true;
+    $errorMessage = "";
 
     if(isset($_SESSION['validUser'])){
         $userName = $_SESSION['username'];
@@ -20,7 +21,7 @@
         //setting fetch mode to php assoicate array
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
     }
-    catch(PDOException){
+    catch(PDOException $e){
         $errorMessage = "Unable to connect to database";
     }
 
@@ -69,6 +70,7 @@
         <div class="main">
             <section>
                 <div class="container">
+                    <span><?=$errorMessage?></span>
                     <div class="responsive-table">
                         <div class="responsive-table-header">
                             <div class="table-header-cell">
@@ -93,7 +95,7 @@
                         <div class="responsive-table-body">
                             <?php
                             while($row=$stmt->fetch()){
-                        ?>
+                            ?>
                             <div class="responsive-table-row <?=($tableRowColor)? "row-light" : "row-dark"?>">
                             <a href="cardview.php?cardID=<?=$row['cardID']?>">
                                 <div class="table-body-cell">
@@ -116,10 +118,10 @@
                                 </div>
                             </a>
                             </div>
-                        <?php
+                            <?php
                                 $tableRowColor = !$tableRowColor;
                             }
-                        ?>
+                            ?>
                         </div>
                     </div>
                 </div>
