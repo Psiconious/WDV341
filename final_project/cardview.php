@@ -20,7 +20,6 @@
     
     if(isset($_SESSION['validUser'])){
         $userName = $_SESSION['username'];
-        require "../dbConnect.php";
         //prepare statement
         $adminSQL = "SELECT admin FROM yugioh_db_users WHERE username = :user";
         $stmt = $conn->prepare($adminSQL);
@@ -71,6 +70,9 @@
             $errorMessage = 'Error Connecting to the Database.';
         }
     }
+    else if(!$admin){
+        header('Location: card_database.php');
+    }
     
     if(isset($_POST['submit']) && $admin){
         $action = $_POST['submit'];
@@ -87,7 +89,7 @@
             $cardEffect =  $_POST['cardEffect'];
             $errorMessage = "<ul>";
 
-            $sql = "INSERT INTO yugioh_db_cards (cardname, cardtype, monsterattribute, monstertype, monsterlevel, monsteratk, monsterdef, spelltrapproperty, cardeffect) VALUES (:name, :cardtype, attribute, :monstertype, :level, :atk, :def, :stprop, :effect)";
+            $sql = "INSERT INTO yugioh_db_cards (cardname, cardtype, cardattribute, monstertype, monsterlevel, monsteratk, monsterdef, spelltrapproperty, cardeffect) VALUES (:name, :cardtype, :attribute, :monstertype, :level, :atk, :def, :stprop, :effect)";
             $stmt = $conn->prepare($sql);
 
             try{
@@ -99,6 +101,9 @@
                     $valid = false;
                     $errorMessage .= "<li>effect field is blank</li>";
                 }
+                if($stProperty == ""){
+                    $stProperty = null;
+                }
                 if($monsterLevel != ""){
                     if(is_numeric($monsterLevel)){
                         if((int)$monsterLevel > 0 && (int)$monsterLevel <= 12){
@@ -106,7 +111,7 @@
                         }
                         else{
                             $valid = false;
-                            $errorMessage .= "<li>monster level out of range</li>";
+                            $errorMessage .= "<li>monster level out of range , expected range: ( 1 - 12 )</li>";
                         }
                     }
                     else{
@@ -114,14 +119,17 @@
                         $errorMessage .= "<li>monster level must be a whole number</li>";
                     }
                 }
+                else{
+                    $monsterLevel = null;
+                }
                 if($monsterATK != ""){
                     if(is_numeric($monsterATK)){
-                        if((int)$monsterATK >= 0 && (int)$monsterATK <= 100000){
+                        if((int)$monsterATK >= 0 && (int)$monsterATK < 100000){
                             $monsterATK = (int)$monsterATK;
                         }
                         else{
                             $valid = false;
-                            $errorMessage .= "<li>monster attack out of range</li>";
+                            $errorMessage .= "<li>monster attack out of range, expected range: ( 0 - 99999 )</li>";
                         }
                     }
                     else{
@@ -129,14 +137,17 @@
                         $errorMessage .= "<li>monster attack must be a whole number</li>";
                     }
                 }
+                else{
+                    $monsterATK = null;
+                }
                 if($monsterDEF != ""){
                     if(is_numeric($monsterDEF)){
-                        if((int)$monsterDEF >= 0 && (int)$monsterDEF <= 100000){
+                        if((int)$monsterDEF >= 0 && (int)$monsterDEF < 100000){
                             $monsterDEF = (int)$monsterDEF;
                         }
                         else{
                             $valid = false;
-                            $errorMessage .= "<li>monster defense out of range</li>";
+                            $errorMessage .= "<li>monster defense out of range, expected range: ( 0 - 99999 )</li>";
                         }
                     }
                     else{
@@ -144,9 +155,41 @@
                         $errorMessage .= "<li>monster defense must be a whole number</li>";
                     }
                 }
+                else{
+                    $monsterDEF = null;
+                }
+                if($valid){
+                    $stmt->bindParam(':name', $cardName);
+                    $stmt->bindParam(':cardtype', $cardType);
+                    $stmt->bindParam(':attribute', $monsterAttribute);
+                    $stmt->bindParam(':monstertype', $monsterType);
+                    $stmt->bindParam(':level', $monsterLevel);
+                    $stmt->bindParam(':atk', $monsterATK);
+                    $stmt->bindParam(':def', $monsterDEF);
+                    $stmt->bindParam(':stprop', $stProperty);
+                    $stmt->bindParam(':effect', $cardEffect);
+
+                    $stmt->execute();
+
+                    $redirctSQl = "SELECT cardID FROM yugioh_db_cards WHERE cardname = :name";
+                    $redirectSTMT = $conn->prepare($redirctSQl);
+
+                    $redirectSTMT->bindParam(':name', $cardName);
+
+                    $redirectSTMT->execute();
+
+                    $redirectSTMT->setFetchMode(PDO::FETCH_ASSOC);
+
+                    $id = $redirectSTMT->fetch();
+
+                    header('Location: cardview.php?cardID='. $id['cardID']);
+                }
             }
             catch(PDOException $e){
                 $errorMessage .= "<li>Failure to add card to database please try again.</li>";
+                if($e->getCode() == 23000){
+                    $errorMessage .= "<li>Cannot enter $cardName into the database already exist</li>";
+                }
             }
             $errorMessage .= "</ul>";
         }
@@ -254,6 +297,7 @@
                             <option value="psychic" <?=($monsterType == 'psychic')? 'selected': ''?>>Psychic</option>
                             <option value="pyro" <?=($monsterType == 'pyro')? 'selected': ''?>>Pyro</option>
                             <option value="reptile" <?=($monsterType == 'reptile')? 'selected': ''?>>Reptile</option>
+                            <option value="rock" <?=($monsterType == 'rock')? 'selected': ''?>>Rock</option>
                             <option value="sea serpent" <?=($monsterType == 'sea serpent')? 'selected': ''?>>Sea Serpent</option>
                             <option value="spellcaster" <?=($monsterType == 'spellcaster')? 'selected': ''?>>Spellcaster</option>
                             <option value="thunder" <?=($monsterType == 'thunder')? 'selected': ''?>>Thunder</option>
