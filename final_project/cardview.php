@@ -72,6 +72,31 @@
         }
     }
     
+    if(isset($_POST['submit'])){
+        $action = $_POST['submit'];
+        if($action == 'add'){
+            $cardName = $_POST['cardName'];
+            $cardType =  $_POST['cardType'];
+            $monsterAttribute =  $_POST['cardAttribute'];
+            $monsterType =  $_POST['monsterType'];
+            $monsterLevel =  $_POST['monsterLevel'];
+            $monsterATK =  $_POST['monsterATK'];
+            $monsterDEF =  $_POST['monsterDEF'];
+            $stProperty =  $_POST['stProperty'];
+            $cardEffect =  $_POST['cardEffect'];
+            echo 'add';
+        }
+        else if($action == 'edit'){
+            echo 'edit';
+        }
+        else if($action == 'delete'){
+            echo 'delete';
+        }
+        else{
+            $errorMessage = 'error';
+        }
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -115,66 +140,94 @@
         <div class="main">
             <section>
                 <div class="container">
-                    <label for="cardName">Name:</label>
-                    <input type="text" name="cardName" id="cardName" value="<?=$cardName?>" <?=(!$admin)? "disabled" : ""?>>
-                    <label for="cardType">Type:</label>
-                    <select name="cardType" id="cardType" <?=(!$admin)? "disabled" : ""?>>
-                        <option value="monster" <?=($cardType == 'monster')? 'selected': ''?>>Monster</option>
-                        <option value="spell" <?=($cardType == 'spell')? 'selected': ''?>>Spell</option>
-                        <option value="trap" <?=($cardType == 'trap')? 'selected': ''?>>Trap</option>
-                    </select>
-                    <label for="stProperty">Spell/Trap Property:</label>
-                    <select name="stProperty" id="stProperty" <?=(!$admin)? "disabled" : ""?>>
-                        <option value="" <?=($stProperty == null)? 'selected': ''?>></option>
-                        <option value=""></option>
-                    </select>
-                    <label for="cardAttribute">Attribute:</label>
-                    <select name="cardAttribute" id="cardAttribute" <?=(!$admin)? "disabled" : ""?>>
-                        <option value="" <?=($monsterAttribute == null)? 'selected': ''?>></option>
-                        <option value="dark" <?=($monsterAttribute == 'dark')? 'selected': ''?>>Dark</option>
-                        <option value="divine" <?=($monsterAttribute == 'divine')? 'selected': ''?>>Divine</option>
-                        <option value="earth" <?=($monsterAttribute == 'earth')? 'selected': ''?>>Earth</option>
-                        <option value="fire" <?=($monsterAttribute == 'fire')? 'selected': ''?>>Fire</option>
-                        <option value="light" <?=($monsterAttribute == 'light')? 'selected': ''?>>Light</option>
-                        <option value="water" <?=($monsterAttribute == 'water')? 'selected': ''?>>Water</option>
-                        <option value="wind" <?=($monsterAttribute == 'wind')? 'selected': ''?>>Wind</option>
-                    </select>
-                    <label for="monsterType">Monster Type:</label>
-                    <select name="monsterType" id="monsterType" <?=(!$admin)? "disabled" : ""?>>
-                        <option value="" <?=($monsterType == null)? 'selected': ''?>></option>
-                        <option value="aqua" <?=($monsterType == 'aqua')? 'selected': ''?>>Aqua</option>
-                        <option value="beast" <?=($monsterType == 'beast')? 'selected': ''?>>Beast</option>
-                        <option value="beast-warrior" <?=($monsterType == 'beast-warrior')? 'selected': ''?>>Beast-Warrior</option>
-                        <option value="creator god" <?=($monsterType == 'creator god')? 'selected': ''?>>Creator God</option>
-                        <option value="cyberse" <?=($monsterType == 'cyberse')? 'selected': ''?>>Cyberse</option>
-                        <option value="dinosaur" <?=($monsterType == 'dinosaur')? 'selected': ''?>>Dinosaur</option>
-                        <option value="divine-beast" <?=($monsterType == 'divine-beast')? 'selected': ''?>>Divine-Beast</option>
-                        <option value="dragon" <?=($monsterType == 'dragon')? 'selected': ''?>>Dragon</option>
-                        <option value="fairy" <?=($monsterType == 'fairy')? 'selected': ''?>>Fairy</option>
-                        <option value="fiend" <?=($monsterType == 'fiend')? 'selected': ''?>>Fiend</option>
-                        <option value="fish" <?=($monsterType == 'fish')? 'selected': ''?>>Fish</option>
-                        <option value="insect" <?=($monsterType == 'insect')? 'selected': ''?>>Insect</option>
-                        <option value="machine" <?=($monsterType == 'machine')? 'selected': ''?>>Machine</option>
-                        <option value="plant" <?=($monsterType == 'plant')? 'selected': ''?>>Plant</option>
-                        <option value="psychic" <?=($monsterType == 'psychic')? 'selected': ''?>>Psychic</option>
-                        <option value="pyro" <?=($monsterType == 'pyro')? 'selected': ''?>>Pyro</option>
-                        <option value="reptile" <?=($monsterType == 'reptile')? 'selected': ''?>>Reptile</option>
-                        <option value="sea serpent" <?=($monsterType == 'sea serpent')? 'selected': ''?>>Sea Serpent</option>
-                        <option value="spellcaster" <?=($monsterType == 'spellcaster')? 'selected': ''?>>Spellcaster</option>
-                        <option value="thunder" <?=($monsterType == 'thunder')? 'selected': ''?>>Thunder</option>
-                        <option value="warrior" <?=($monsterType == 'warrior')? 'selected': ''?>>Warrior</option>
-                        <option value="winged beast" <?=($monsterType == 'winged beast')? 'selected': ''?>>Winged Beast</option>
-                        <option value="wyrm" <?=($monsterType == 'wyrm')? 'selected': ''?>>Wyrm</option>
-                        <option value="zombie" <?=($monsterType == 'zombie')? 'selected': ''?>>Zombie</option>
-                    </select>
-                    <label for="monsterLevel">Level:</label>
-                    <input type="text" name="monsterLevel" id="monsterLevel" value="<?=$monsterLevel?>" <?=(!$admin)? "disabled" : ""?>>
-                    <label for="monsterATK">Attack:</label>
-                    <input type="text" name="monsterATK" id="monsterATK" value="<?=$monsterATK?>" <?=(!$admin)? "disabled" : ""?>>
-                    <label for="monsterDEF">Defense:</label>
-                    <input type="text" name="monsterDEF" id="monsterDEF" value="<?=$monsterDEF?>" <?=(!$admin)? "disabled" : ""?>>
-                    <label for="cardEffect">Effect:</label>
-                    <textarea name="cardEffect" id="cardEffect" cols="50" rows="10"><?=$cardEffect?></textarea>
+                    <span class="error-message"><?=$errorMessage?></span>
+                    <form action="cardview.php<?=(isset($_GET['cardID']))? "?cardID=$id": ""?>" method="post">
+                        <label for="cardName">Name:</label>
+                        <input type="text" name="cardName" id="cardName" value="<?=$cardName?>" <?=(!$admin)? "disabled" : ""?>>
+                        <label for="cardType">Type:</label>
+                        <select name="cardType" id="cardType" <?=(!$admin)? "disabled" : ""?>>
+                            <option value="monster" <?=($cardType == 'monster')? 'selected': ''?>>Monster</option>
+                            <option value="spell" <?=($cardType == 'spell')? 'selected': ''?>>Spell</option>
+                            <option value="trap" <?=($cardType == 'trap')? 'selected': ''?>>Trap</option>
+                        </select>
+                        <label for="stProperty">Spell/Trap Property:</label>
+                        <select name="stProperty" id="stProperty" <?=(!$admin)? "disabled" : ""?>>
+                            <option value="" <?=($stProperty == null)? 'selected': ''?>></option>
+                            <option value="normal" <?=($stProperty == 'normal')? 'selected': ''?>>Normal</option>
+                            <option value="continuous" <?=($stProperty == 'continuous')? 'selected': ''?>>Continuous</option>
+                            <option value="equip" <?=($stProperty == 'equip')? 'selected': ''?>>Equip</option>
+                            <option value="field" <?=($stProperty == 'field')? 'selected': ''?>>Field</option>
+                            <option value="quick-play" <?=($stProperty == 'quick-play')? 'selected': ''?>>Quick-Play</option>
+                            <option value="ritual" <?=($stProperty == 'ritual')? 'selected': ''?>>Ritual</option>
+                            <option value="counter" <?=($stProperty == 'counter')? 'selected': ''?>>Counter</option>
+                        </select>
+                        <label for="cardAttribute">Attribute:</label>
+                        <select name="cardAttribute" id="cardAttribute" <?=(!$admin)? "disabled" : ""?>>
+                            <option value="" <?=($monsterAttribute == null)? 'selected': ''?>></option>
+                            <option value="dark" <?=($monsterAttribute == 'dark')? 'selected': ''?>>Dark</option>
+                            <option value="divine" <?=($monsterAttribute == 'divine')? 'selected': ''?>>Divine</option>
+                            <option value="earth" <?=($monsterAttribute == 'earth')? 'selected': ''?>>Earth</option>
+                            <option value="fire" <?=($monsterAttribute == 'fire')? 'selected': ''?>>Fire</option>
+                            <option value="light" <?=($monsterAttribute == 'light')? 'selected': ''?>>Light</option>
+                            <option value="water" <?=($monsterAttribute == 'water')? 'selected': ''?>>Water</option>
+                            <option value="wind" <?=($monsterAttribute == 'wind')? 'selected': ''?>>Wind</option>
+                        </select>
+                        <label for="monsterType">Monster Type:</label>
+                        <select name="monsterType" id="monsterType" <?=(!$admin)? "disabled" : ""?>>
+                            <option value="" <?=($monsterType == null)? 'selected': ''?>></option>
+                            <option value="aqua" <?=($monsterType == 'aqua')? 'selected': ''?>>Aqua</option>
+                            <option value="beast" <?=($monsterType == 'beast')? 'selected': ''?>>Beast</option>
+                            <option value="beast-warrior" <?=($monsterType == 'beast-warrior')? 'selected': ''?>>Beast-Warrior</option>
+                            <option value="creator god" <?=($monsterType == 'creator god')? 'selected': ''?>>Creator God</option>
+                            <option value="cyberse" <?=($monsterType == 'cyberse')? 'selected': ''?>>Cyberse</option>
+                            <option value="dinosaur" <?=($monsterType == 'dinosaur')? 'selected': ''?>>Dinosaur</option>
+                            <option value="divine-beast" <?=($monsterType == 'divine-beast')? 'selected': ''?>>Divine-Beast</option>
+                            <option value="dragon" <?=($monsterType == 'dragon')? 'selected': ''?>>Dragon</option>
+                            <option value="fairy" <?=($monsterType == 'fairy')? 'selected': ''?>>Fairy</option>
+                            <option value="fiend" <?=($monsterType == 'fiend')? 'selected': ''?>>Fiend</option>
+                            <option value="fish" <?=($monsterType == 'fish')? 'selected': ''?>>Fish</option>
+                            <option value="insect" <?=($monsterType == 'insect')? 'selected': ''?>>Insect</option>
+                            <option value="machine" <?=($monsterType == 'machine')? 'selected': ''?>>Machine</option>
+                            <option value="plant" <?=($monsterType == 'plant')? 'selected': ''?>>Plant</option>
+                            <option value="psychic" <?=($monsterType == 'psychic')? 'selected': ''?>>Psychic</option>
+                            <option value="pyro" <?=($monsterType == 'pyro')? 'selected': ''?>>Pyro</option>
+                            <option value="reptile" <?=($monsterType == 'reptile')? 'selected': ''?>>Reptile</option>
+                            <option value="sea serpent" <?=($monsterType == 'sea serpent')? 'selected': ''?>>Sea Serpent</option>
+                            <option value="spellcaster" <?=($monsterType == 'spellcaster')? 'selected': ''?>>Spellcaster</option>
+                            <option value="thunder" <?=($monsterType == 'thunder')? 'selected': ''?>>Thunder</option>
+                            <option value="warrior" <?=($monsterType == 'warrior')? 'selected': ''?>>Warrior</option>
+                            <option value="winged beast" <?=($monsterType == 'winged beast')? 'selected': ''?>>Winged Beast</option>
+                            <option value="wyrm" <?=($monsterType == 'wyrm')? 'selected': ''?>>Wyrm</option>
+                            <option value="zombie" <?=($monsterType == 'zombie')? 'selected': ''?>>Zombie</option>
+                        </select>
+                        <label for="monsterLevel">Level:</label>
+                        <select name="monsterLevel" id="monsterLevel" <?=(!$admin)? "disabled" : ""?>>
+                            <option value="" <?=($monsterLevel == null)? 'selected': ''?>></option>
+                            <option value="1"<?=($monsterLevel == 1)? 'selected': ''?>>1</option>
+                            <option value="2" <?=($monsterLevel == 2)? 'selected': ''?>>2</option>
+                            <option value="3" <?=($monsterLevel == 3)? 'selected': ''?>>3</option>
+                            <option value="4" <?=($monsterLevel == 4)? 'selected': ''?>>4</option>
+                            <option value="5" <?=($monsterLevel == 5)? 'selected': ''?>>5</option>
+                            <option value="6" <?=($monsterLevel == 6)? 'selected': ''?>>6</option>
+                            <option value="7" <?=($monsterLevel == 7)? 'selected': ''?>>7</option>
+                            <option value="8" <?=($monsterLevel == 8)? 'selected': ''?>>8</option>
+                            <option value="9" <?=($monsterLevel == 9)? 'selected': ''?>>9</option>
+                            <option value="10" <?=($monsterLevel == 10)? 'selected': ''?>>10</option>
+                            <option value="11" <?=($monsterLevel == 11)? 'selected': ''?>>11</option>
+                            <option value="12" <?=($monsterLevel == 12)? 'selected': ''?>>12</option>
+                        </select>
+                        <label for="monsterATK">Attack:</label>
+                        <input type="text" name="monsterATK" id="monsterATK" value="<?=$monsterATK?>" <?=(!$admin)? "disabled" : ""?>>
+                        <label for="monsterDEF">Defense:</label>
+                        <input type="text" name="monsterDEF" id="monsterDEF" value="<?=$monsterDEF?>" <?=(!$admin)? "disabled" : ""?>>
+                        <label for="cardEffect">Effect:</label>
+                        <textarea name="cardEffect" id="cardEffect" cols="50" rows="10"><?=$cardEffect?></textarea>
+                        <div class="card-form-buttons">
+                            <input type="submit" name="submit" value="add" class="normal">
+                            <input type="submit" name="submit" value="edit" class="normal">
+                            <input type="submit" name="submit" value="delete" class="warning">
+                        </div>
+                    </form>
                 </div>
             </section>
         </div>

@@ -3,9 +3,29 @@
 
     $tableRowColor = true;
     $errorMessage = "";
+    $admin = false;
 
     if(isset($_SESSION['validUser'])){
         $userName = $_SESSION['username'];
+        require "../dbConnect.php";
+        //prepare statement
+        $adminSQL = "SELECT admin FROM yugioh_db_users WHERE username = :user";
+        $stmt = $conn->prepare($adminSQL);
+        try{
+            //bind params
+            $stmt->bindParam(':user', $userName);
+            //execute
+            $stmt->execute();
+            //set fetch mode
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+            //assign admin
+            $fetchedData = $stmt->fetch();
+            $admin = $fetchedData['admin'];
+        }
+        catch(PDOException $e){
+            $admin = false;
+        }
     }
 
     require 'php/page-handler.php';
@@ -122,6 +142,14 @@
                                 $tableRowColor = !$tableRowColor;
                             }
                             ?>
+                        </div>
+                        <div class="responsive-table-footer">
+                            <div class="table-footer-cell"></div>
+                            <div class="table-footer-cell"></div>
+                            <div class="table-footer-cell"></div>
+                            <div class="table-footer-cell"></div>
+                            <div class="table-footer-cell"></div>
+                            <div class="table-footer-cell"><?=($admin)? '<a href="cardview.php"><input type="button" value="Add New"></a>' : ""?></div>
                         </div>
                     </div>
                 </div>

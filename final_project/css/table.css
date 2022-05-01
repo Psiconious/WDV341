@@ -29,8 +29,20 @@
     display: table-footer-group;
     background-color: gray;
     font-weight: bold;
-    font-size: 25px;
     color: rgba(255,255,255,0.45);
+}
+
+.responsive-table-footer input{
+    border: none;
+    width: 100%;
+    background: green;
+    border-radius: 5px;
+    height: 30px;
+    color: white;
+}
+
+.responsive-table-footer input:hover{
+    background: blue;
 }
 
 .responsive-table-header{
@@ -62,9 +74,10 @@
 
 .table-footer-cell{
     display: table-cell;
-    padding: 10px;
+    padding: 5px;
     text-align: justify;
     border-bottom: 1px solid black;
+    height: 42px;
 }
 
 .table-header-cell{
