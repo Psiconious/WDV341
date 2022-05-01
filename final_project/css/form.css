@@ -11,8 +11,6 @@ body{
 .errormessages{
     width: 60%;
     background: #f0f0f0;
-    text-align: center;
-    color: red;
 }
 
 .form-body{

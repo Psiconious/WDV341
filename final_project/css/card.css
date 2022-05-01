@@ -1,3 +1,45 @@
+.card-form-buttons{
+    display: flex;
+}
+
+.card-form-buttons input{
+    margin-top: 5px;
+    height: 30px;
+    text-transform: uppercase;
+    box-shadow: 0 1px 1px black;
+    cursor: pointer;
+}
+
+.card-form-buttons input:first-child{
+    margin-right: 5px;
+}
+
+.card-form-buttons input:only-child{
+    margin-right: 0;
+}
+
+.card-form-buttons input.normal{
+    color: white;
+    background: green;
+    border: none;
+    border-radius: 5px;
+}
+
+.card-form-buttons input.normal:hover{
+    background: lime;
+}
+
+.card-form-buttons input.warning{
+    color: white;
+    background: red;
+    border: none;
+    border-radius: 5px;
+}
+
+.card-form-buttons input.warning:hover{
+    background: salmon;
+}
+
 input,select,textarea{
     display: block;
     width: 100%;

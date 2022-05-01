@@ -72,9 +72,10 @@
         }
     }
     
-    if(isset($_POST['submit'])){
+    if(isset($_POST['submit']) && $admin){
         $action = $_POST['submit'];
         if($action == 'add'){
+            $valid = true;
             $cardName = $_POST['cardName'];
             $cardType =  $_POST['cardType'];
             $monsterAttribute =  $_POST['cardAttribute'];
@@ -84,16 +85,77 @@
             $monsterDEF =  $_POST['monsterDEF'];
             $stProperty =  $_POST['stProperty'];
             $cardEffect =  $_POST['cardEffect'];
-            echo 'add';
+            $errorMessage = "<ul>";
+
+            $sql = "INSERT INTO yugioh_db_cards (cardname, cardtype, monsterattribute, monstertype, monsterlevel, monsteratk, monsterdef, spelltrapproperty, cardeffect) VALUES (:name, :cardtype, attribute, :monstertype, :level, :atk, :def, :stprop, :effect)";
+            $stmt = $conn->prepare($sql);
+
+            try{
+                if($cardName == ""){
+                    $valid = false;
+                    $errorMessage .= "<li>name field is blank</li>";
+                }
+                if($cardEffect == ""){
+                    $valid = false;
+                    $errorMessage .= "<li>effect field is blank</li>";
+                }
+                if($monsterLevel != ""){
+                    if(is_numeric($monsterLevel)){
+                        if((int)$monsterLevel > 0 && (int)$monsterLevel <= 12){
+                            $monsterLevel = (int)$monsterLevel;
+                        }
+                        else{
+                            $valid = false;
+                            $errorMessage .= "<li>monster level out of range</li>";
+                        }
+                    }
+                    else{
+                        $valid = false;
+                        $errorMessage .= "<li>monster level must be a whole number</li>";
+                    }
+                }
+                if($monsterATK != ""){
+                    if(is_numeric($monsterATK)){
+                        if((int)$monsterATK >= 0 && (int)$monsterATK <= 100000){
+                            $monsterATK = (int)$monsterATK;
+                        }
+                        else{
+                            $valid = false;
+                            $errorMessage .= "<li>monster attack out of range</li>";
+                        }
+                    }
+                    else{
+                        $valid = false;
+                        $errorMessage .= "<li>monster attack must be a whole number</li>";
+                    }
+                }
+                if($monsterDEF != ""){
+                    if(is_numeric($monsterDEF)){
+                        if((int)$monsterDEF >= 0 && (int)$monsterDEF <= 100000){
+                            $monsterDEF = (int)$monsterDEF;
+                        }
+                        else{
+                            $valid = false;
+                            $errorMessage .= "<li>monster defense out of range</li>";
+                        }
+                    }
+                    else{
+                        $valid = false;
+                        $errorMessage .= "<li>monster defense must be a whole number</li>";
+                    }
+                }
+            }
+            catch(PDOException $e){
+                $errorMessage .= "<li>Failure to add card to database please try again.</li>";
+            }
+            $errorMessage .= "</ul>";
         }
         else if($action == 'edit'){
-            echo 'edit';
         }
         else if($action == 'delete'){
-            echo 'delete';
         }
         else{
-            $errorMessage = 'error';
+            $errorMessage = 'Error occured while submitting form please try again';
         }
     }
 
@@ -140,10 +202,10 @@
         <div class="main">
             <section>
                 <div class="container">
-                    <span class="error-message"><?=$errorMessage?></span>
+                    <span class="errormessages"><?=$errorMessage?></span>
                     <form action="cardview.php<?=(isset($_GET['cardID']))? "?cardID=$id": ""?>" method="post">
                         <label for="cardName">Name:</label>
-                        <input type="text" name="cardName" id="cardName" value="<?=$cardName?>" <?=(!$admin)? "disabled" : ""?>>
+                        <input type="text" name="cardName" id="cardName" value="<?=$cardName?>" <?=(!$admin)? "disabled" : ""?> required>
                         <label for="cardType">Type:</label>
                         <select name="cardType" id="cardType" <?=(!$admin)? "disabled" : ""?>>
                             <option value="monster" <?=($cardType == 'monster')? 'selected': ''?>>Monster</option>
@@ -221,11 +283,23 @@
                         <label for="monsterDEF">Defense:</label>
                         <input type="text" name="monsterDEF" id="monsterDEF" value="<?=$monsterDEF?>" <?=(!$admin)? "disabled" : ""?>>
                         <label for="cardEffect">Effect:</label>
-                        <textarea name="cardEffect" id="cardEffect" cols="50" rows="10"><?=$cardEffect?></textarea>
+                        <textarea name="cardEffect" id="cardEffect" cols="50" rows="10" required><?=$cardEffect?></textarea>
                         <div class="card-form-buttons">
-                            <input type="submit" name="submit" value="add" class="normal">
-                            <input type="submit" name="submit" value="edit" class="normal">
-                            <input type="submit" name="submit" value="delete" class="warning">
+                            <?php
+                                if($admin){
+                                    if(!isset($_GET['cardID'])){
+                            ?>
+                                        <input type="submit" name="submit" value="add" class="normal">
+                            <?php
+                                    }
+                                    else{
+                            ?>
+                                        <input type="submit" name="submit" value="edit" class="normal">
+                                        <input type="submit" name="submit" value="delete" class="warning">
+                            <?php
+                                    }
+                                }
+                            ?>
                         </div>
                     </form>
                 </div>

@@ -58,6 +58,11 @@ body{
     width: 160px;
 }
 
+.errormessages{
+    text-align: center;
+    color: red;
+}
+
 .float-left{
     float: left;
     margin-right: 10px;
@@ -155,10 +160,7 @@ section{
 
 @media (max-width: 600px){
     .container{
-        width: initial;
-    }
-    section{
-        justify-content: flex-start;
+        width: 100%;
     }
 }
 @media (min-width: 601px) and (max-width:991px){
