@@ -421,7 +421,7 @@ if (isset($_POST['submit']) && $admin) {
                         <label for="monsterDEF">Defense:</label>
                         <input type="text" name="monsterDEF" id="monsterDEF" value="<?= $monsterDEF ?>" <?= (!$admin) ? "disabled" : "" ?>>
                         <label for="cardEffect">Effect:</label>
-                        <textarea name="cardEffect" id="cardEffect" cols="50" rows="10" required><?= $cardEffect ?></textarea>
+                        <textarea name="cardEffect" id="cardEffect" cols="50" rows="10" <?= (!$admin) ? "disabled" : "" ?> required><?= $cardEffect ?></textarea>
                         <div class="card-form-buttons">
                             <?php
                             if ($admin) {
