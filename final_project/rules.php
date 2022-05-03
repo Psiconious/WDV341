@@ -41,6 +41,7 @@ require 'php/page-handler.php';
                         <li><a href="index.php" class="<?php active('index.php'); ?>">Home</a></li>
                         <li><a href="rules.php" class="<?php active('rules.php'); ?>">How To Play</a></li>
                         <li><a href="card_database.php" class="<?php active('card_database.php'); ?>">Cards</a></li>
+                        <li><a href="contact_form.php" class="<?php active('contact_form.php');?>">Contact Us</a></li>
                         <?php
                         if (isset($_SESSION['validUser'])) {
                         ?>
