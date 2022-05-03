@@ -5,7 +5,7 @@ if( isset($_SESSION['validUser'])){
     //already signed on, go to admin panel
     session_unset();
     session_destroy();
-    header("Location: signon.php");              //PHP redirect back to another page
+    header('Location: ' . $_SERVER['HTTP_REFERER']);              //PHP redirect back to another page
 }
 else{
     header("Location: signon.php");              //PHP redirect back to another page
